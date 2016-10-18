@@ -32,9 +32,11 @@ module.exports = {
       password: {
         type: Sequelize.STRING,
         allowNull: false
+      },
+      type: {
+        type: Sequelize.STRING,
+        allowNull: false
       }
-
-      // TODO: add field for questions answered?
     }, {
       freezeTableName: true // Model tableName will be the same as the model name
     });
@@ -60,6 +62,13 @@ module.exports = {
       freezeTableName: true
     });
 
+    // questions answered model
+    // var Answered = sequelize.define('answered', {
+      // need foreign key to questions
+    // }, {
+      // freezeTableName: true
+    // });
+
     // Create user table
     User.sync({force: true}).then(function () {
       // Table created
@@ -71,12 +80,14 @@ module.exports = {
           firstName: 'Krista',
           lastName: 'Gee',
           email: 'k.g@gmail.com',
-          password: 'hello123'
+          password: 'hello123',
+          type: 'guest'
         },
         {
           firstName: 'admin',
           email: 'admin@example.com',
-          password: 'admin'        
+          password: 'admin789',
+          type: 'admin'
         }
       ];
 

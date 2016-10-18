@@ -40,6 +40,15 @@ app.get('/api/users/all', function(req, res){
   });
 });
 
+app.get('/api/user/:email', function(req, res){
+  var userQuery = 'SELECT * FROM user WHERE email=\''+req.params.email+'\'';
+
+  connection.query(userQuery, function(err, result){
+    if(err) throw err;
+    res.json(result);
+  });
+});
+
 app.post('/api/user/', function(req, res){
   var userQuery = 'SELECT * FROM user WHERE email=\''+req.body.email+'\' AND password=\''+req.body.password+'\'';
 

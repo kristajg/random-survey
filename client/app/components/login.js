@@ -59,9 +59,10 @@ export default class Login extends Component {
 
     // if no errors, submit
     if(!emailError && !passwordError) {
-      Api.getUser(formData, (response) => {
+      Api.loginUser(formData, (response) => {
         if(response.length) {
-          localStorage.setItem('sessionID', 'valid');
+          // TODO: make sure a jwt is encoded on the backend and sent over here instead of user object
+          localStorage.setItem('sessionID', response[0].email);
           browserHistory.push('/');
         } else {
           this.setState({
