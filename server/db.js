@@ -37,12 +37,9 @@ module.exports = {
       }
 
       // TODO: add field for questions answered?
-      // TODO: see if STRING is the right type for password storage
     }, {
       freezeTableName: true // Model tableName will be the same as the model name
     });
-
-
 
     // survey model
     var Survey = sequelize.define('survey', {
@@ -65,21 +62,41 @@ module.exports = {
       freezeTableName: true
     });
 
-    // User model sync 
+    // Create user table
     User.sync({force: true}).then(function () {
       // Table created
-      return User.create({
-        firstName: 'Krista',
-        lastName: 'Gee',
-        email: 'kay.gee@gmail.com',
-        password: 'hello123'
+      console.log('User table successfully created.');
+
+      // Bulk upload fixture data to user table
+      var userData = [
+        {
+          firstName: 'Krista',
+          lastName: 'Gee',
+          email: 'k.g@gmail.com',
+          password: 'hello123'
+        },
+        {
+          firstName: 'admin',
+          email: 'admin@example.com',
+          password: 'admin'        
+        }
+      ];
+
+      User.bulkCreate(userData)
+      .then(function(response){
+        console.log('User data successfully inserted');
+      })
+      .catch(function(error){
+        console.log('User data failed to upload');
       });
     });
 
-
+    // Create survey table
     Survey.sync({force: true}).then(function () {
-      // Table created
-      return Survey.create(
+      console.log('Survey table successfully created.');
+
+      // Bulk upload fixture data to survey table
+      var surveyData = [
         {
           question: 'What is your favorite kind of cheese?',
           optionOne: 'gouda',
@@ -90,12 +107,17 @@ module.exports = {
           question: 'How would you rate your knowledge of space time travel?',
           optionOne: 'Somewhat familiar',
           optionTwo: 'Not very familiar',
-          optionThree: 'Bruh I\'m in like 5 places at once rn'
+          optionThree: 'I\'m in like 5 places at once rn'
         }
-      );
+      ];
+
+      Survey.bulkCreate(surveyData)
+      .then(function(response){
+        console.log('Survey data successfully inserted');
+      })
+      .catch(function(error){
+        console.log('Survey data failed to upload');
+      });      
     });
-
-
-
   }
 }
