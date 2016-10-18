@@ -19,12 +19,6 @@ function authenticateUser() {
     // Redirect to login screen
     browserHistory.push('/login');
   }
-  // else {
-    // if it does exist, decode jwt & check against db for legitimacy
-
-    // if it's no bueno, log them out
-  // }
-
 }
 
 export { authenticateUser };

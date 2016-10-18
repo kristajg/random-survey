@@ -41,9 +41,6 @@ app.get('/api/users/all', function(req, res){
 });
 
 app.post('/api/user/', function(req, res){
-  console.log('req.body ', req.body);
-
-
   var userQuery = 'SELECT * FROM user WHERE email=\''+req.body.email+'\' AND password=\''+req.body.password+'\'';
 
   connection.query(userQuery, function(err, result){
