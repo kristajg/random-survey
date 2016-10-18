@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Api from '../services/api';
+import { browserHistory } from 'react-router';
 
 export default class Login extends Component {
   constructor(props) {
@@ -13,7 +14,8 @@ export default class Login extends Component {
       formErrors: {
         emailError: false,
         passwordError: false
-      }
+      },
+      retryVisible: false
     }
 
     this.handleTextChange = this.handleTextChange.bind(this);
@@ -57,16 +59,15 @@ export default class Login extends Component {
 
     // if no errors, submit
     if(!emailError && !passwordError) {
-      // submit to db
-      console.log('yay ', formData);
-
-      Api.getUser(formData, function(response){
-        console.log('cool response ', response);
-
-
-        // if response is good, set localStorage && redirect to home
-
-        // if it's not, show appropriate message
+      Api.getUser(formData, (response) => {
+        if(response.length) {
+          localStorage.setItem('sessionID', 'valid');
+          browserHistory.push('/');
+        } else {
+          this.setState({
+            retryVisible: true
+          });
+        }
       });
     }
   }
@@ -86,6 +87,7 @@ export default class Login extends Component {
           <span style={{ display: this.state.formErrors.passwordError ? 'block' : 'none', color: 'red' }}>Password is a required field.</span>
           <br />
           <button onClick={this.submit}>Submit</button>
+          <span style={{ display: this.state.retryVisible ? 'block' : 'none', color: 'red' }}>That is not a valid username and password.</span>
         </div>      
       </div>
     );

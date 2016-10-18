@@ -9,9 +9,16 @@ module.exports = {
     path: __dirname + "/dist"
   },
   devServer: {
-    contentBase: './app/',
-    port: 3001,
-    hot: true
+      contentBase: './app/',
+      port: 3001,
+      hot: true,
+      historyApiFallback: true,
+      proxy: {
+        '/api/*': {
+          target: 'http://localhost:3000',
+          secure: false
+        }
+      }
   },
   devtool: 'source-map',
   plugins: [new HtmlWebpackPlugin({

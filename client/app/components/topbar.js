@@ -2,6 +2,17 @@ import React, { Component } from 'react';
 import Api from '../services/api';
 
 export default class Topbar extends Component {
+  constructor(props) {
+    super(props);
+
+    this.logOut = this.logOut.bind(this);
+  }
+
+  logOut() {
+    // Clear out localStorage
+    localStorage.clear();
+  }
+
   render() {
     return (
       <nav className="navbar navbar-default navbar-static-top">
@@ -13,7 +24,7 @@ export default class Topbar extends Component {
           <div id="navbar" className="collapse navbar-collapse">
             <ul className="nav navbar-nav navbar-right">
               <li>
-                <a href="#">
+                <a href="#" onClick={this.logOut}>
                   <i className="glyphicon glyphicon-cog"></i> Logout
                 </a>
               </li>

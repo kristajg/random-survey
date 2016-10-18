@@ -33,18 +33,18 @@ app.get('/', function(req, res){
   res.send("Hello world");
 });
 
-app.get('/users', function(req, res){
+app.get('/api/users/all', function(req, res){
   connection.query('SELECT * FROM user', function(err, results){
     if(err) throw err;
     res.json(results);
   });
 });
 
-app.post('/user/:email', function(req, res){
+app.post('/api/user/', function(req, res){
   console.log('req.body ', req.body);
 
 
-  var userQuery = 'SELECT * FROM user WHERE email=\''+req.params.email+'\'';
+  var userQuery = 'SELECT * FROM user WHERE email=\''+req.body.email+'\' AND password=\''+req.body.password+'\'';
 
   connection.query(userQuery, function(err, result){
     if(err) throw err;
@@ -52,7 +52,7 @@ app.post('/user/:email', function(req, res){
   });
 });
 
-app.get('/questions', function(req, res) {
+app.get('/api/questions', function(req, res) {
   connection.query('SELECT * FROM survey', function(err, results){
     if (err) throw err;
     res.json(results);

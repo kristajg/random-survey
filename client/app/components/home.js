@@ -12,7 +12,7 @@ export default class Home extends Component {
   }
 
   componentWillMount() {
-    // hit api to get initial unique survey question
+    // Get unique survey question
     // Api.getUser
   }
 
@@ -28,11 +28,6 @@ export default class Home extends Component {
         <Topbar />
         <div className="container">
           Surveys go here
-
-            <Link to="/login">
-              Login ??
-            </Link>
-
           <Form />
         </div>      
       </div>

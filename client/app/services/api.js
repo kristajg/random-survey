@@ -3,8 +3,8 @@ import superagent from 'superagent';
 export default {
   getUser: function(data, callback){
     superagent
-      .post('/user/'+data.email)
-      .send(data.password)
+      .post('/api/user/')
+      .send(data)
       .end(function(err, res) {
         if(err) {
           console.log('Get user by email failed: ', err);
@@ -16,7 +16,7 @@ export default {
 
   getSurveyQuestion: function(email, callback){
     superagent
-      .get('/question')
+      .get('/api/question')
       .end(function(err, res){
         if(err) {
           console.log('Get unique survey question failed: ', err);
