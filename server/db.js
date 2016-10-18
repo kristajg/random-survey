@@ -14,8 +14,6 @@ var sequelize = new Sequelize('randomsurvey', 'root', '', {
 
 module.exports = {
   createTables: function() {
-
-
     // user model
     var User = sequelize.define('user', {
       firstName: {

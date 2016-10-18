@@ -17,8 +17,7 @@ app.set('port', process.env.PORT || 3000);
 // Create tables
 db.createTables();
 
-
-// mysql stuff... can abstract out later
+// mysql connectiong... can abstract out later to middleware for routes
 var connection = mysql.createConnection({
   host:     'localhost',
   port:     '3306',
@@ -29,8 +28,6 @@ var connection = mysql.createConnection({
 connection.connect();
 
 
-
-
 // Routing
 app.get('/', function(req, res){
   res.send("Hello world");
@@ -39,6 +36,13 @@ app.get('/', function(req, res){
 app.get('/users', function(req, res){
   connection.query('SELECT * FROM user', function(err, results){
     if(err) throw err;
+    res.json(results);
+  });
+});
+
+app.get('/questions', function(req, res) {
+  connection.query('SELECT * FROM survey', function(err, results){
+    if (err) throw err;
     res.json(results);
   });
 });
