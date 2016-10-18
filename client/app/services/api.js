@@ -3,7 +3,7 @@ import Superagent from 'superagent';
 export default {
   getUser: function(email, callback){
     superagent
-      .get('/user')
+      .get('/user/'+email)
       .end(function(err, res) {
         if(err) {
           console.log('Get user by email failed: ', err);

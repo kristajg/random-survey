@@ -40,6 +40,15 @@ app.get('/users', function(req, res){
   });
 });
 
+app.get('/user/:email', function(req, res){
+  var userQuery = 'SELECT * FROM user WHERE email=\''+req.params.email+'\'';
+
+  connection.query(userQuery, function(err, result){
+    if(err) throw err;
+    res.json(result);
+  });
+});
+
 app.get('/questions', function(req, res) {
   connection.query('SELECT * FROM survey', function(err, results){
     if (err) throw err;

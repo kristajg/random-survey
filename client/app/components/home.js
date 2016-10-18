@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Api from '../services/api';
 import Topbar from './topbar';
 import Form from './form';
+import { Link } from 'react-router';
 
 export default class Home extends Component {
   constructor(props) {
@@ -12,7 +13,7 @@ export default class Home extends Component {
 
   componentWillMount() {
     // hit api to get initial unique survey question
-
+    // Api.getUser
   }
 
   surveySubmit() {
@@ -27,6 +28,11 @@ export default class Home extends Component {
         <Topbar />
         <div className="container">
           Surveys go here
+
+            <Link to="/login">
+              Login ??
+            </Link>
+
           <Form />
         </div>      
       </div>
