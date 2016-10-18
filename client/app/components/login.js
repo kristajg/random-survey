@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Api from '../services/api';
 
 export default class Login extends Component {
   constructor(props) {
@@ -58,6 +59,15 @@ export default class Login extends Component {
     if(!emailError && !passwordError) {
       // submit to db
       console.log('yay ', formData);
+
+      Api.getUser(formData, function(response){
+        console.log('cool response ', response);
+
+
+        // if response is good, set localStorage && redirect to home
+
+        // if it's not, show appropriate message
+      });
     }
   }
 

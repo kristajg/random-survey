@@ -40,7 +40,10 @@ app.get('/users', function(req, res){
   });
 });
 
-app.get('/user/:email', function(req, res){
+app.post('/user/:email', function(req, res){
+  console.log('req.body ', req.body);
+
+
   var userQuery = 'SELECT * FROM user WHERE email=\''+req.params.email+'\'';
 
   connection.query(userQuery, function(err, result){

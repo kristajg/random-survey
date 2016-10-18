@@ -1,9 +1,10 @@
-import Superagent from 'superagent';
+import superagent from 'superagent';
 
 export default {
-  getUser: function(email, callback){
+  getUser: function(data, callback){
     superagent
-      .get('/user/'+email)
+      .post('/user/'+data.email)
+      .send(data.password)
       .end(function(err, res) {
         if(err) {
           console.log('Get user by email failed: ', err);
