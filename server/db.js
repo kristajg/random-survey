@@ -1,7 +1,8 @@
-var Sequelize = require("sequelize");
+const Sequelize = require("sequelize");
+const mysql = require('mysql');
 
 // Initialize db connection
-var sequelize = new Sequelize('randomsurvey', 'root', '', {
+const sequelize = new Sequelize('randomsurvey', 'root', '', {
   host: 'localhost',
   dialect: 'mysql',
 
@@ -63,11 +64,14 @@ module.exports = {
     });
 
     // questions answered model
-    // var Answered = sequelize.define('answered', {
-      // need foreign key to questions
-    // }, {
-      // freezeTableName: true
-    // });
+    var Answered = sequelize.define('answered', {
+      email: {
+        type: Sequelize.STRING,
+        allowNull: false
+      }
+    }, {
+      freezeTableName: true
+    });
 
     // Create user table
     User.sync({force: true}).then(function () {
@@ -79,7 +83,7 @@ module.exports = {
         {
           firstName: 'Krista',
           lastName: 'Gee',
-          email: 'k.g@gmail.com',
+          email: 'guest@example.com',
           password: 'hello123',
           type: 'guest'
         },
@@ -128,5 +132,30 @@ module.exports = {
         console.log('Survey data failed to upload');
       });      
     });
+
+    // Create Answered table
+    Answered.sync({force: true}).then(function () {
+      console.log('Answered table successfully created.');
+      // var answeredData = [
+      //   {
+      //     email: 'guest@example.com'
+      //   }
+      // ];
+
+    });
+  },
+
+  mysqlConnect: function() {
+    const connection = mysql.createConnection({
+      host:     'localhost',
+      port:     '3306',
+      user:     'root',
+      password:   '',
+      database:   'randomsurvey'
+    });
+
+    connection.connect();
+
+    return connection;
   }
 }

@@ -1,11 +1,11 @@
 'use strict';
 
-var express = require('express');
-var http  = require('http');
-var mysql = require('mysql');
-var db = require('./db.js');
-var bodyParser = require('body-parser');
-var app = express();
+const express = require('express');
+const http  = require('http');
+const fs = require('fs');
+const db = require('./db.js');
+const bodyParser = require('body-parser');
+const app = express();
 
 // Include body parser for JSON fun
 app.use(bodyParser.json());
@@ -17,54 +17,17 @@ app.set('port', process.env.PORT || 3000);
 // Create tables
 db.createTables();
 
-// mysql connectiong... can abstract out later to middleware for routes
-var connection = mysql.createConnection({
-  host:     'localhost',
-  port:     '3306',
-  user:     'root',
-  password:   '',
-  database:   'randomsurvey'
-});   
-connection.connect();
-
-
 // Routing
+fs.readdirSync(__dirname + '/routes/').forEach(function(file) {
+  const routePath = __dirname + '/routes/' + file,
+    routes = require(routePath);
+  app.use('/api', routes);
+});
+
+// Sample route
 app.get('/', function(req, res){
   res.send("Hello world");
 });
-
-app.get('/api/users/all', function(req, res){
-  connection.query('SELECT * FROM user', function(err, results){
-    if(err) throw err;
-    res.json(results);
-  });
-});
-
-app.get('/api/user/:email', function(req, res){
-  var userQuery = 'SELECT * FROM user WHERE email=\''+req.params.email+'\'';
-
-  connection.query(userQuery, function(err, result){
-    if(err) throw err;
-    res.json(result);
-  });
-});
-
-app.post('/api/user/', function(req, res){
-  var userQuery = 'SELECT * FROM user WHERE email=\''+req.body.email+'\' AND password=\''+req.body.password+'\'';
-
-  connection.query(userQuery, function(err, result){
-    if(err) throw err;
-    res.json(result);
-  });
-});
-
-app.get('/api/questions', function(req, res) {
-  connection.query('SELECT * FROM survey', function(err, results){
-    if (err) throw err;
-    res.json(results);
-  });
-});
-
 
 // Server
 http.createServer(app).listen(app.get('port'), function(){

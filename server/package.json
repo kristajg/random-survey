@@ -12,6 +12,14 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "mysql": "^2.11.1",
-    "sequelize": "^3.24.3"
+    "sequelize": "^3.24.3",
+    "suspend": "^0.7.0"
+  },
+  "devDependencies": {
+    "eslint": "^3.8.1",
+    "eslint-config-airbnb": "^12.0.0",
+    "eslint-plugin-import": "^1.16.0",
+    "eslint-plugin-jsx-a11y": "^2.2.3",
+    "eslint-plugin-react": "^6.4.1"
   }
 }

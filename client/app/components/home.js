@@ -28,7 +28,7 @@ export default class Home extends Component {
         <div className="container">
           Surveys go here
           <Form />
-        </div>      
+        </div>
       </div>
     );
   }
