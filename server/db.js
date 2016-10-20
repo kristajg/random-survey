@@ -113,14 +113,14 @@ module.exports = {
         {
           question: 'What is your favorite kind of cheese?',
           optionOne: 'gouda',
-          optionTwo: 'chedda chedda cheeeze',
+          optionTwo: 'chedda chedda cheese',
           optionThree: 'swiss'
         },
         {
           question: 'How would you rate your knowledge of space time travel?',
           optionOne: 'Somewhat familiar',
           optionTwo: 'Not very familiar',
-          optionThree: 'I\'m in like 5 places at once rn'
+          optionThree: 'Bruh I\'m in like 5 places at once rn'
         }
       ];
 

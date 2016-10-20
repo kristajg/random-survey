@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Api from '../services/api';
-import Topbar from './topbar';
+import Topbar from './shared/topbar';
 import Form from './form';
 
 export default class Home extends Component {
@@ -25,6 +25,12 @@ export default class Home extends Component {
     return (
       <div>
         <Topbar />
+        <div className="jumbotron survey-banner">
+          <div className="container">
+            <h1>Welcome to the survey question generator.</h1>
+          </div>
+        </div>
+
         <div className="container">
           Surveys go here
           <Form />

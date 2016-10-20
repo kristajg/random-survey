@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Api from '../services/api';
-import Topbar from './topbar';
+import Topbar from './shared/topbar';
 
 export default class Admin extends Component {
   constructor(props) {

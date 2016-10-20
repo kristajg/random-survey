@@ -1,10 +1,11 @@
 {
   "name": "random-survey",
   "version": "1.0.0",
-  "description": "",
+  "description": "API for the random survey generator.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "lint": "eslint ."
   },
   "author": "Krista Goralczyk",
   "license": "ISC",
@@ -12,8 +13,9 @@
     "body-parser": "^1.15.2",
     "express": "^4.14.0",
     "mysql": "^2.11.1",
-    "sequelize": "^3.24.3",
-    "suspend": "^0.7.0"
+    "passport": "^0.3.2",
+    "passport-facebook": "^2.1.1",
+    "sequelize": "^3.24.3"
   },
   "devDependencies": {
     "eslint": "^3.8.1",

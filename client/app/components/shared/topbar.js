@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Api from '../services/api';
+import Api from '../../services/api';
 import { Link } from 'react-router';
 
 export default class Topbar extends Component {
